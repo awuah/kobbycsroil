@@ -94,7 +94,7 @@ export default function HomePage() {
                   href="#register-form"
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-brand-500 hover:bg-brand-400 text-slate-950 font-bold text-sm transition-all shadow-lg shadow-brand-500/25 group"
                 >
-                  Register / Express Interest
+                  Register Now
                   <ArrowDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
                 </a>
 
@@ -221,16 +221,16 @@ export default function HomePage() {
         <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
             <h2 className="text-2xl font-extrabold text-slate-900">
-              Training Application Form
+              Training Registration Form
             </h2>
             <p className="text-sm text-slate-600">
-              Submit your registration or expression of interest below. You will receive an
-              immediate SMS confirmation.
+              Complete the form below to register. Your seat is automatically confirmed with an
+              instant SMS confirmation.
             </p>
           </div>
           <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-700 bg-brand-50 border border-brand-200 px-3 py-1.5 rounded-full self-start sm:self-auto">
             <CheckCircle2 className="w-3.5 h-3.5" />
-            Instant SMS Receipt Enabled
+            Instant Seat Confirmation &amp; SMS
           </div>
         </div>
 

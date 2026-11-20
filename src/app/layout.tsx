@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "5-Day Palm Oil Processing & Value Addition Training | CSIR-OPRI & WUSC-Ghana",
   description:
-    "Official registration and expression of interest portal for the 5-Day Training in Palm Oil Processing and Value Addition organized by CSIR-OPRI and WUSC-Ghana in collaboration with Hon. Kwabena Okyere Darko-Mansah (MP, Takoradi Constituency).",
+    "Official registration portal for the 5-Day Training in Palm Oil Processing and Value Addition organized by CSIR-OPRI and WUSC-Ghana in collaboration with Hon. Kwabena Okyere Darko-Mansah (MP, Takoradi Constituency).",
 };
 
 export default function RootLayout({

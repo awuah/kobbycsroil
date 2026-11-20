@@ -48,7 +48,7 @@ export default function Header() {
             }`}
           >
             <ClipboardCheck className="w-3.5 h-3.5" />
-            Register / Express Interest
+            Register Now
           </Link>
 
           <a
@@ -123,7 +123,7 @@ export default function Header() {
                 : "text-slate-700 hover:bg-slate-50"
             }`}
           >
-            Register / Express Interest
+            Register Now
           </Link>
           <a
             href="/#program-details"

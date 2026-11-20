@@ -62,8 +62,8 @@ export async function sendArkeselSMS(
 }
 
 /**
- * Sends immediate confirmation SMS upon registration/expression of interest submission.
- * Simply informs the applicant of receipt and to await confirmation on the success of their application.
+ * Sends immediate confirmation & acceptance SMS upon registration submission.
+ * Registration automatically confirms the applicant's seat in the training program.
  */
 export async function sendRegistrationReceivedSMS(applicant: {
   full_name: string;
@@ -71,7 +71,7 @@ export async function sendRegistrationReceivedSMS(applicant: {
   registration_number: string;
 }) {
   const firstName = applicant.full_name.trim().split(/\s+/)[0] || applicant.full_name;
-  const message = `Dear ${firstName}, your application for the 5-Day Palm Oil Processing & Value Addition Training (Ref: ${applicant.registration_number}) has been received. Please await confirmation on the success of your application. Thank you!`;
+  const message = `Congratulations ${firstName}! Your registration for the 5-Day Palm Oil Processing & Value Addition Training (Ref: ${applicant.registration_number}) is CONFIRMED and you have been accepted into the program. Date: Thu 26th - Mon 30th Nov 2026, Time: 08:00 AM daily, Venue: Government Secretariat, Takoradi. Enquiries: Abena +233242108535.`;
 
   return await sendArkeselSMS(applicant.phone_number, message);
 }

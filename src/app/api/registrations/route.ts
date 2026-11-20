@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     const experience_level = String(body.experience_level || "Beginner").trim();
     const focus_interest = String(body.focus_interest || "Modern Palm Oil Processing").trim();
     const id_number = String(body.id_number || "").trim();
-    const registration_type = body.registration_type === "interest" ? "interest" : "register";
+    const registration_type = "register";
     const available_all_5_days = body.available_all_5_days !== false;
     const notes = String(body.notes || "").trim();
 
@@ -102,7 +102,7 @@ export async function POST(req: NextRequest) {
       id_number,
       available_all_5_days,
       notes,
-      status: "pending",
+      status: "confirmed",
       sms_sent: false,
     };
 
@@ -139,13 +139,13 @@ export async function POST(req: NextRequest) {
     // Log submission event
     await supabase.from("kboil_registration_logs").insert({
       registration_id: created.id,
-      action: registration_type === "interest" ? "EXPRESSION_OF_INTEREST" : "REGISTRATION_SUBMITTED",
+      action: "REGISTRATION_CONFIRMED",
       previous_status: null,
-      new_status: "pending",
+      new_status: "confirmed",
       notes: smsResult.success
-        ? "Application submitted and confirmation SMS sent."
-        : `Application submitted. SMS warning: ${smsResult.error || "Unknown"}`,
-      performed_by: "applicant",
+        ? "Registration automatically confirmed and acceptance SMS sent."
+        : `Registration automatically confirmed. SMS warning: ${smsResult.error || "Unknown"}`,
+      performed_by: "system",
     });
 
     return NextResponse.json(

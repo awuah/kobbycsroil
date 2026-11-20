@@ -155,11 +155,7 @@ function TrackContent() {
                     {record.registration_number}
                   </span>
                   <span>•</span>
-                  <span>
-                    {record.registration_type === "interest"
-                      ? "Expression of Interest"
-                      : "Full Training Registration"}
-                  </span>
+                  <span>5-Day Training Registration</span>
                 </div>
               </div>
 
@@ -184,28 +180,28 @@ function TrackContent() {
                 {[
                   {
                     step: 1,
-                    title: "Application Received",
-                    desc: "Details logged & SMS receipt sent",
+                    title: "Registration Submitted",
+                    desc: "Participant details recorded",
                   },
                   {
                     step: 2,
-                    title: "Coordinator Review",
-                    desc: "Verification by CSIR-OPRI & WUSC team",
+                    title: "Seat Confirmed",
+                    desc: "Automatic acceptance & SMS sent",
                   },
                   {
                     step: 3,
                     title:
                       record.status === "confirmed"
-                        ? "Seat Confirmed"
+                        ? "Ready to Attend"
                         : record.status === "waitlisted"
                         ? "Waitlisted"
                         : record.status === "declined"
-                        ? "Decision Made"
-                        : "Final Confirmation",
+                        ? "Not Selected"
+                        : "Attend Training",
                     desc:
                       record.status === "confirmed"
-                        ? "Ready for 26th – 30th Nov 2026"
-                        : "SMS notification upon confirmation",
+                        ? "26th – 30th Nov 2026, 08:00 AM"
+                        : "Check status updates here",
                   },
                 ].map((item) => {
                   const done = currentStep >= item.step;

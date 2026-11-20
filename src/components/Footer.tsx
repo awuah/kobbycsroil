@@ -71,7 +71,7 @@ export default function Footer() {
             <ul className="space-y-2.5 text-xs">
               <li>
                 <Link href="/#register-form" className="hover:text-white transition-colors">
-                  Register / Express Interest
+                  Register for Training
                 </Link>
               </li>
               <li>

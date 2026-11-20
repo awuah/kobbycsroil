@@ -18,11 +18,9 @@ import {
   MessageSquare,
   Calendar,
   Clock,
-  ClipboardCheck,
-  HeartHandshake,
   RotateCcw,
 } from "lucide-react";
-import { EVENT_INFO, RegistrationType, TrainingRegistration } from "@/lib/types";
+import { EVENT_INFO, TrainingRegistration } from "@/lib/types";
 
 const TAKORADI_COMMUNITIES = [
   "Amanful East",
@@ -72,7 +70,6 @@ const FOCUS_AREAS = [
 ];
 
 export default function RegistrationForm() {
-  const [registrationType, setRegistrationType] = useState<RegistrationType>("register");
   const [formData, setFormData] = useState({
     full_name: "",
     gender: "",
@@ -122,7 +119,7 @@ export default function RegistrationForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
-          registration_type: registrationType,
+          registration_type: "register",
         }),
       });
 
@@ -186,16 +183,14 @@ export default function RegistrationForm() {
             <CheckCircle2 className="w-9 h-9 text-white" />
           </div>
           <span className="inline-block px-3 py-1 rounded-full bg-white/20 text-xs font-bold uppercase tracking-wider mb-2">
-            {submittedRecord.registration_type === "interest"
-              ? "Expression of Interest Received"
-              : "Registration Submitted"}
+            Seat Confirmed • Accepted Into Program
           </span>
           <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-            Thank You, {submittedRecord.full_name}!
+            Welcome, {submittedRecord.full_name}!
           </h3>
           <p className="text-brand-100 text-sm mt-2 max-w-lg mx-auto">
-            Your application for the <strong>{EVENT_INFO.title}</strong> has been recorded. Please
-            await confirmation on the success of your application.
+            Your registration for the <strong>{EVENT_INFO.title}</strong> is{" "}
+            <strong>confirmed</strong> and you have been accepted into the training program.
           </p>
         </div>
 
@@ -204,17 +199,17 @@ export default function RegistrationForm() {
           <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
               <div className="text-xs font-semibold uppercase tracking-wider text-slate-500">
-                Application Reference Number
+                Registration Reference Number
               </div>
               <div className="text-2xl sm:text-3xl font-black text-brand-700 tracking-wider font-mono mt-0.5">
                 {submittedRecord.registration_number}
               </div>
               <p className="text-xs text-slate-500 mt-1">
-                Keep this reference number safe to check your approval status anytime.
+                Please present this reference number or your confirmation SMS at the venue.
               </p>
             </div>
-            <div className="px-3.5 py-2 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold">
-              Status: Pending Confirmation
+            <div className="px-3.5 py-2 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold">
+              Status: Confirmed Seat
             </div>
           </div>
 
@@ -234,19 +229,20 @@ export default function RegistrationForm() {
             <div className="text-xs sm:text-sm leading-relaxed">
               {smsSent ? (
                 <>
-                  <strong className="font-bold">SMS Confirmation Sent!</strong> We have sent an SMS
+                  <strong className="font-bold">Confirmation SMS Sent!</strong> We have sent an SMS
                   to <span className="font-mono font-bold">{submittedRecord.phone_number}</span>{" "}
-                  confirming receipt of your application. You will be notified once your slot is
-                  confirmed.
+                  confirming your acceptance into the training program along with the event date,
+                  time, and venue details.
                 </>
               ) : (
                 <>
-                  <strong className="font-bold">Application Recorded!</strong> Your details are
-                  safely saved under{" "}
+                  <strong className="font-bold">Seat Confirmed!</strong> Your registration is
+                  confirmed under{" "}
                   <span className="font-mono font-bold">
                     {submittedRecord.registration_number}
                   </span>
-                  . Please keep this slip and await confirmation from our coordinators.
+                  . Please keep this slip and report to the Government Secretariat, Takoradi at
+                  08:00 AM on Thursday 26th Nov. 2026.
                 </>
               )}
             </div>
@@ -347,75 +343,19 @@ export default function RegistrationForm() {
     <div className="bg-white rounded-2xl border border-slate-200 shadow-lg overflow-hidden">
       {/* Form Header */}
       <div className="bg-gradient-to-r from-slate-900 via-slate-900 to-brand-950 text-white px-6 sm:px-8 py-6 border-b border-slate-800">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div>
-            <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand-400">
-              <Sparkles className="w-3.5 h-3.5" />
-              Official Online Registration Portal
-            </span>
-            <h2 className="text-xl sm:text-2xl font-extrabold mt-1">
-              Register or Express Interest
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-300 mt-1">
-              Complete the form below to apply for the 5-Day Palm Oil Processing &amp; Value
-              Addition Training. An instant SMS receipt will be sent to your phone.
-            </p>
-          </div>
-        </div>
-
-        {/* Mode Switcher */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-5">
-          <button
-            type="button"
-            onClick={() => setRegistrationType("register")}
-            className={`flex items-start gap-3 p-3.5 rounded-xl border text-left transition-all ${
-              registrationType === "register"
-                ? "bg-brand-500/20 border-brand-400 text-white shadow-sm"
-                : "bg-slate-800/60 border-slate-700 text-slate-300 hover:bg-slate-800"
-            }`}
-          >
-            <div
-              className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 ${
-                registrationType === "register"
-                  ? "bg-brand-500 text-slate-950"
-                  : "bg-slate-700 text-slate-300"
-              }`}
-            >
-              <ClipboardCheck className="w-5 h-5" />
-            </div>
-            <div>
-              <div className="text-sm font-bold">Register to Attend</div>
-              <div className="text-[11px] text-slate-300">
-                Apply for a training seat (26th – 30th Nov 2026)
-              </div>
-            </div>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setRegistrationType("interest")}
-            className={`flex items-start gap-3 p-3.5 rounded-xl border text-left transition-all ${
-              registrationType === "interest"
-                ? "bg-palm-500/20 border-palm-400 text-white shadow-sm"
-                : "bg-slate-800/60 border-slate-700 text-slate-300 hover:bg-slate-800"
-            }`}
-          >
-            <div
-              className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 ${
-                registrationType === "interest"
-                  ? "bg-palm-400 text-slate-950"
-                  : "bg-slate-700 text-slate-300"
-              }`}
-            >
-              <HeartHandshake className="w-5 h-5" />
-            </div>
-            <div>
-              <div className="text-sm font-bold">Express Interest</div>
-              <div className="text-[11px] text-slate-300">
-                Indicate interest &amp; receive confirmation updates
-              </div>
-            </div>
-          </button>
+        <div>
+          <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand-400">
+            <Sparkles className="w-3.5 h-3.5" />
+            Official Online Registration Portal
+          </span>
+          <h2 className="text-xl sm:text-2xl font-extrabold mt-1">
+            Register for the 5-Day Training Program
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-300 mt-1">
+            Complete the form below to secure your seat for the 5-Day Palm Oil Processing &amp;
+            Value Addition Training. Your registration automatically confirms your acceptance and
+            sends an instant confirmation SMS to your phone.
+          </p>
         </div>
       </div>
 
@@ -530,7 +470,7 @@ export default function RegistrationForm() {
                 className="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition"
               />
               <p className="text-[11px] text-brand-700 font-medium mt-1">
-                An instant SMS receipt will be sent to this number.
+                An instant confirmation SMS will be sent to this number.
               </p>
             </div>
 
@@ -701,14 +641,12 @@ export default function RegistrationForm() {
             {submitting ? (
               <>
                 <Loader2 className="w-4 h-4 animate-spin" />
-                Submitting Application...
+                Confirming Registration...
               </>
             ) : (
               <>
                 <Send className="w-4 h-4" />
-                {registrationType === "interest"
-                  ? "Submit Expression of Interest"
-                  : "Complete Registration"}
+                Complete Registration
               </>
             )}
           </button>

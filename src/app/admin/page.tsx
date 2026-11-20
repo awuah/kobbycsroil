@@ -15,8 +15,6 @@ import {
   X,
   MessageSquare,
   Trash2,
-  ClipboardCheck,
-  HeartHandshake,
 } from "lucide-react";
 import {
   RegistrationStatus,
@@ -32,7 +30,6 @@ export default function AdminDashboardPage() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
-  const [typeFilter, setTypeFilter] = useState<string>("all");
 
   // Modal state
   const [selected, setSelected] = useState<TrainingRegistration | null>(null);
@@ -133,7 +130,6 @@ export default function AdminDashboardPage() {
     const q = search.trim().toLowerCase();
     return registrations.filter((r) => {
       if (statusFilter !== "all" && r.status !== statusFilter) return false;
-      if (typeFilter !== "all" && r.registration_type !== typeFilter) return false;
       if (!q) return true;
       return (
         r.full_name.toLowerCase().includes(q) ||
@@ -143,17 +139,15 @@ export default function AdminDashboardPage() {
         r.occupation.toLowerCase().includes(q)
       );
     });
-  }, [registrations, search, statusFilter, typeFilter]);
+  }, [registrations, search, statusFilter]);
 
   const stats = useMemo(() => {
     const total = registrations.length;
     const confirmed = registrations.filter((r) => r.status === "confirmed").length;
-    const pending = registrations.filter((r) => r.status === "pending").length;
-    const registerCount = registrations.filter((r) => r.registration_type === "register").length;
-    const interestCount = registrations.filter((r) => r.registration_type === "interest").length;
+    const smsSentCount = registrations.filter((r) => r.sms_sent).length;
     const female = registrations.filter((r) => r.gender === "Female").length;
     const male = registrations.filter((r) => r.gender === "Male").length;
-    return { total, confirmed, pending, registerCount, interestCount, female, male };
+    return { total, confirmed, smsSentCount, female, male };
   }, [registrations]);
 
   const exportCSV = () => {
@@ -269,45 +263,14 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* KPI Cards */}
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
             <div className="flex items-center justify-between text-slate-500 text-xs font-semibold">
-              <span>Total Applicants</span>
+              <span>Total Registrants</span>
               <Users className="w-4 h-4 text-brand-600" />
             </div>
             <div className="text-2xl font-black text-slate-900 mt-1">{stats.total}</div>
-            <div className="text-[11px] text-slate-500 mt-1">
-              {stats.female} Female • {stats.male} Male
-            </div>
-          </div>
-
-          <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
-            <div className="flex items-center justify-between text-slate-500 text-xs font-semibold">
-              <span>Registering</span>
-              <ClipboardCheck className="w-4 h-4 text-emerald-600" />
-            </div>
-            <div className="text-2xl font-black text-emerald-700 mt-1">
-              {stats.registerCount}
-            </div>
-            <div className="text-[11px] text-slate-500 mt-1">Direct seat applications</div>
-          </div>
-
-          <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
-            <div className="flex items-center justify-between text-slate-500 text-xs font-semibold">
-              <span>Expressed Interest</span>
-              <HeartHandshake className="w-4 h-4 text-amber-600" />
-            </div>
-            <div className="text-2xl font-black text-amber-700 mt-1">{stats.interestCount}</div>
-            <div className="text-[11px] text-slate-500 mt-1">Interest submissions</div>
-          </div>
-
-          <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
-            <div className="flex items-center justify-between text-slate-500 text-xs font-semibold">
-              <span>Pending Review</span>
-              <Clock className="w-4 h-4 text-amber-500" />
-            </div>
-            <div className="text-2xl font-black text-slate-900 mt-1">{stats.pending}</div>
-            <div className="text-[11px] text-slate-500 mt-1">Awaiting decision</div>
+            <div className="text-[11px] text-slate-500 mt-1">All registered participants</div>
           </div>
 
           <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
@@ -316,7 +279,29 @@ export default function AdminDashboardPage() {
               <CheckCircle2 className="w-4 h-4 text-brand-600" />
             </div>
             <div className="text-2xl font-black text-brand-700 mt-1">{stats.confirmed}</div>
-            <div className="text-[11px] text-slate-500 mt-1">Approved for training</div>
+            <div className="text-[11px] text-slate-500 mt-1">Accepted into training</div>
+          </div>
+
+          <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
+            <div className="flex items-center justify-between text-slate-500 text-xs font-semibold">
+              <span>Gender Breakdown</span>
+              <Clock className="w-4 h-4 text-indigo-500" />
+            </div>
+            <div className="text-2xl font-black text-slate-900 mt-1">
+              {stats.female}F / {stats.male}M
+            </div>
+            <div className="text-[11px] text-slate-500 mt-1">Female / Male registrants</div>
+          </div>
+
+          <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
+            <div className="flex items-center justify-between text-slate-500 text-xs font-semibold">
+              <span>SMS Confirmations</span>
+              <MessageSquare className="w-4 h-4 text-emerald-600" />
+            </div>
+            <div className="text-2xl font-black text-emerald-700 mt-1">
+              {stats.smsSentCount}
+            </div>
+            <div className="text-[11px] text-slate-500 mt-1">Delivered via Arkesel</div>
           </div>
         </div>
 
@@ -333,23 +318,14 @@ export default function AdminDashboardPage() {
             />
           </div>
           <select
-            value={typeFilter}
-            onChange={(e) => setTypeFilter(e.target.value)}
-            className="rounded-xl border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-700 bg-white"
-          >
-            <option value="all">All Types</option>
-            <option value="register">Register to Attend</option>
-            <option value="interest">Express Interest</option>
-          </select>
-          <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
             className="rounded-xl border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-700 bg-white"
           >
             <option value="all">All Statuses</option>
+            <option value="confirmed">Confirmed</option>
             <option value="pending">Pending</option>
             <option value="under_review">Under Review</option>
-            <option value="confirmed">Confirmed</option>
             <option value="waitlisted">Waitlisted</option>
             <option value="declined">Not Selected</option>
           </select>
@@ -362,8 +338,7 @@ export default function AdminDashboardPage() {
               <thead>
                 <tr className="bg-slate-50 border-b border-slate-200 text-[11px] font-bold uppercase tracking-wider text-slate-500">
                   <th className="py-3 px-4">Ref / Date</th>
-                  <th className="py-3 px-4">Applicant</th>
-                  <th className="py-3 px-4">Type</th>
+                  <th className="py-3 px-4">Participant</th>
                   <th className="py-3 px-4">Community &amp; Role</th>
                   <th className="py-3 px-4">SMS</th>
                   <th className="py-3 px-4">Status</th>
@@ -373,13 +348,13 @@ export default function AdminDashboardPage() {
               <tbody className="divide-y divide-slate-100 text-xs">
                 {filtered.length === 0 ? (
                   <tr>
-                    <td colSpan={7} className="py-12 text-center text-slate-400">
+                    <td colSpan={6} className="py-12 text-center text-slate-400">
                       No registrations match your current filters.
                     </td>
                   </tr>
                 ) : (
                   filtered.map((reg) => {
-                    const st = STATUS_CONFIG[reg.status] || STATUS_CONFIG.pending;
+                    const st = STATUS_CONFIG[reg.status] || STATUS_CONFIG.confirmed;
                     return (
                       <tr key={reg.id} className="hover:bg-slate-50/80 transition-colors">
                         <td className="py-3 px-4 whitespace-nowrap">
@@ -395,17 +370,6 @@ export default function AdminDashboardPage() {
                           <div className="text-[11px] text-slate-500">
                             {reg.phone_number} • {reg.gender}
                           </div>
-                        </td>
-                        <td className="py-3 px-4 whitespace-nowrap">
-                          <span
-                            className={`inline-block px-2 py-0.5 rounded-md text-[11px] font-bold ${
-                              reg.registration_type === "interest"
-                                ? "bg-amber-50 text-amber-700"
-                                : "bg-brand-50 text-brand-700"
-                            }`}
-                          >
-                            {reg.registration_type === "interest" ? "Interest" : "Register"}
-                          </span>
                         </td>
                         <td className="py-3 px-4">
                           <div className="font-semibold text-slate-800">{reg.community}</div>
