@@ -200,7 +200,7 @@ function TrackContent() {
                         : "Attend Training",
                     desc:
                       record.status === "confirmed"
-                        ? "26th – 30th Nov 2026, 08:00 AM"
+                        ? "8th – 12th Dec 2026, 08:00 AM"
                         : "Check status updates here",
                   },
                 ].map((item) => {

@@ -54,15 +54,15 @@ export default function HomePage() {
 
               {/* Key Event Info Cards */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-left">
-                <div className="bg-slate-800/70 border border-slate-700/70 rounded-xl p-3.5 backdrop-blur">
+                <div className="bg-slate-800/70 border border-palm-400/50 rounded-xl p-3.5 backdrop-blur">
                   <Calendar className="w-5 h-5 text-palm-400 mb-1.5" />
-                  <div className="text-[11px] uppercase tracking-wider text-slate-400 font-semibold">
-                    Date
+                  <div className="text-[11px] uppercase tracking-wider text-palm-300 font-semibold">
+                    New Date
                   </div>
                   <div className="text-xs sm:text-sm font-bold text-white mt-0.5">
-                    26th – 30th Nov. 2026
+                    8th – 12th Dec. 2026
                   </div>
-                  <div className="text-[11px] text-slate-400">Thursday to Monday</div>
+                  <div className="text-[11px] text-slate-400">Tuesday to Saturday</div>
                 </div>
 
                 <div className="bg-slate-800/70 border border-slate-700/70 rounded-xl p-3.5 backdrop-blur">
@@ -110,8 +110,12 @@ export default function HomePage() {
             </div>
 
             {/* Right Column: Official Flyer */}
-            <div className="lg:col-span-5 max-w-md mx-auto w-full">
+            <div className="lg:col-span-5 max-w-md mx-auto w-full space-y-2.5">
               <FlyerShowcase />
+              <div className="text-center text-xs text-palm-300 bg-slate-800/80 border border-palm-400/30 rounded-xl px-3.5 py-2 font-medium">
+                Schedule Update: Training postponed from 26–30 Nov to{" "}
+                <strong className="text-white">8th – 12th Dec. 2026</strong> (Time &amp; venue unchanged).
+              </div>
             </div>
           </div>
         </div>
@@ -182,7 +186,7 @@ export default function HomePage() {
                 5-Day Intensive Cohort
               </h3>
               <p className="text-xs text-slate-600 leading-relaxed">
-                Runs Thursday 26th Nov. to Monday 30th Nov. 2026 at 08:00 AM daily at the
+                Runs Tuesday 8th Dec. to Saturday 12th Dec. 2026 at 08:00 AM daily at the
                 Government Secretariat, Takoradi.
               </p>
             </div>

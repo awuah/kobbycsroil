@@ -40,8 +40,8 @@ export const EVENT_INFO = {
     "Office of the Member of Parliament — Hon. Kwabena Okyere Darko-Mansah (MP, Takoradi Constituency)",
   invitedGuest: "Hon. Kwabena Okyere Darko-Mansah",
   invitedGuestTitle: "Biochemist & MP, Takoradi Constituency",
-  dates: "Thursday, 26th Nov. 2026 – Monday, 30th Nov. 2026",
-  shortDates: "26th – 30th Nov. 2026",
+  dates: "Tuesday, 8th Dec. 2026 – Saturday, 12th Dec. 2026",
+  shortDates: "8th – 12th Dec. 2026",
   venue: "Government Secretariat, Takoradi",
   time: "08:00 AM Daily",
   contactName: "Abena",
@@ -75,7 +75,7 @@ export const STATUS_CONFIG: Record<
     bg: "bg-emerald-50",
     border: "border-emerald-200",
     description:
-      "Congratulations! Your seat is confirmed. Please report to the Government Secretariat by 08:00 AM on Thursday 26th Nov. 2026.",
+      "Congratulations! Your seat is confirmed. Please report to the Government Secretariat by 08:00 AM on Tuesday, 8th Dec. 2026 (8th – 12th Dec. 2026).",
   },
   waitlisted: {
     label: "Waitlisted",

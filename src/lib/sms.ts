@@ -71,7 +71,7 @@ export async function sendRegistrationReceivedSMS(applicant: {
   registration_number: string;
 }) {
   const firstName = applicant.full_name.trim().split(/\s+/)[0] || applicant.full_name;
-  const message = `Congratulations ${firstName}! Your registration for the 5-Day Palm Oil Processing & Value Addition Training (Ref: ${applicant.registration_number}) is CONFIRMED and you have been accepted into the program. Date: Thu 26th - Mon 30th Nov 2026, Time: 08:00 AM daily, Venue: Government Secretariat, Takoradi. Enquiries: Abena +233242108535.`;
+  const message = `Congratulations ${firstName}! Your registration for the 5-Day Palm Oil Processing & Value Addition Training (Ref: ${applicant.registration_number}) is CONFIRMED and you have been accepted into the program. Date: Tue 8th - Sat 12th Dec 2026, Time: 08:00 AM daily, Venue: Government Secretariat, Takoradi. Enquiries: Abena +233242108535.`;
 
   return await sendArkeselSMS(applicant.phone_number, message);
 }
@@ -85,7 +85,7 @@ export async function sendRegistrationConfirmedSMS(applicant: {
   registration_number: string;
 }) {
   const firstName = applicant.full_name.trim().split(/\s+/)[0] || applicant.full_name;
-  const message = `Congratulations ${firstName}! Your application for the 5-Day Palm Oil Processing & Value Addition Training (Ref: ${applicant.registration_number}) has been CONFIRMED. Date: 26th-30th Nov 2026, 08:00 AM at Government Secretariat, Takoradi. Contact Abena: +233242108535.`;
+  const message = `Congratulations ${firstName}! Your application for the 5-Day Palm Oil Processing & Value Addition Training (Ref: ${applicant.registration_number}) has been CONFIRMED. Date: 8th-12th Dec 2026, 08:00 AM at Government Secretariat, Takoradi. Contact Abena: +233242108535.`;
 
   return await sendArkeselSMS(applicant.phone_number, message);
 }

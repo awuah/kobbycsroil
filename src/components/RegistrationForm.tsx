@@ -242,7 +242,7 @@ export default function RegistrationForm() {
                     {submittedRecord.registration_number}
                   </span>
                   . Please keep this slip and report to the Government Secretariat, Takoradi at
-                  08:00 AM on Thursday 26th Nov. 2026.
+                  08:00 AM on Tuesday 8th Dec. 2026.
                 </>
               )}
             </div>
@@ -622,7 +622,7 @@ export default function RegistrationForm() {
             <span className="text-xs sm:text-sm text-slate-700 leading-relaxed">
               <strong className="text-slate-900">5-Day Attendance Confirmation:</strong> I am
               available to attend the sessions from{" "}
-              <strong>Thursday 26th Nov. 2026 to Monday 30th Nov. 2026</strong> starting at{" "}
+              <strong>Tuesday 8th Dec. 2026 to Saturday 12th Dec. 2026</strong> starting at{" "}
               <strong>08:00 AM</strong> at the <strong>Government Secretariat, Takoradi</strong>.
             </span>
           </label>
